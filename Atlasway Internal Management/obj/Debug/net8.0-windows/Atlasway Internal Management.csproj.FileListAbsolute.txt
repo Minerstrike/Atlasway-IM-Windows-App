@@ -1,0 +1,29 @@
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\Atlasway Internal Management.exe
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\Atlasway Internal Management.deps.json
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\Atlasway Internal Management.runtimeconfig.json
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\Atlasway Internal Management.pdb
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Windows\HomeWindow.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\App.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management_MarkupCompile.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management_MarkupCompile.lref
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Windows\HomeWindow.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.g.resources
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.GeneratedMSBuildEditorConfig.editorconfig
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.AssemblyInfoInputs.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.AssemblyInfo.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.csproj.CoreCompileInputs.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\refint\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.pdb
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.genruntimeconfig.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\ref\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\ControlzEx.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\MahApps.Metro.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Debug\net8.0-windows\de\MahApps.Metro.resources.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.csproj.AssemblyReference.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Atlasway Internal Management.csproj.CopyComplete
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\App.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Debug\net8.0-windows\Themes\Generic.baml

@@ -1,0 +1,39 @@
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\Atlasway Internal Management.exe
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\Atlasway Internal Management.deps.json
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\Atlasway Internal Management.runtimeconfig.json
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\Atlasway Internal Management.pdb
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\ControlzEx.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\MahApps.Metro.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\Microsoft.Xaml.Behaviors.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\bin\Release\net8.0-windows7.0\de\MahApps.Metro.resources.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.csproj.AssemblyReference.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Resource Dictionaries\LightTheme.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\HomeWindow.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\ClientsPage.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\HomePage.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\ProjectsPage.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\StaffPage.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\App.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management_Content.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\GeneratedInternalTypeHelper.g.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management_MarkupCompile.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management_MarkupCompile.lref
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\App.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Themes\Generic.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\HomeWindow.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\ClientsPage.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\HomePage.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\ProjectsPage.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Windows\Pages\StaffPage.baml
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.g.resources
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.GeneratedMSBuildEditorConfig.editorconfig
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.AssemblyInfoInputs.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.AssemblyInfo.cs
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.csproj.CoreCompileInputs.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.csproj.CopyComplete
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\refint\Atlasway Internal Management.dll
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.pdb
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\Atlasway Internal Management.genruntimeconfig.cache
+C:\VS projects\Atlasway IM Windows App\Atlasway Internal Management\obj\Release\net8.0-windows7.0\ref\Atlasway Internal Management.dll
