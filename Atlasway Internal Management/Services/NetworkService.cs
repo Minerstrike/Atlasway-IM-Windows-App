@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Threading;
 using Atlasway_Internal_Management.Models;
 
 namespace Atlasway_Internal_Management.Services;
@@ -15,14 +16,14 @@ public static class NetworkService
 
     #region Requests
 
-    public static async Task<List<Client>> GetClients()
+    public static async Task<List<Client>> GetClients(CancellationToken cancellationToken)
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "clients"))
         {
             if (response.IsSuccessStatusCode)
             {
                 List<Client> clients;
-                clients = await response.Content.ReadAsAsync<List<Client>>();
+                clients = await response.Content.ReadAsAsync<List<Client>>(cancellationToken: cancellationToken);
 
                 return clients;
             }
@@ -33,14 +34,14 @@ public static class NetworkService
         }
     }
 
-    public static async Task<List<Staff>> GetStaff()
+    public static async Task<List<Staff>> GetStaff(CancellationToken cancellationToken)
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "staff"))
         {
             if (response.IsSuccessStatusCode)
             {
                 List<Staff> staff;
-                staff = await response.Content.ReadAsAsync<List<Staff>>();
+                staff = await response.Content.ReadAsAsync<List<Staff>>(cancellationToken: cancellationToken);
 
                 return staff;
             }
@@ -51,14 +52,14 @@ public static class NetworkService
         }
     }
 
-    public static async Task<List<Project>> GetProjects()
+    public static async Task<List<Project>> GetProjects(CancellationToken cancellationToken)
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "projects"))
         {
             if (response.IsSuccessStatusCode)
             {
                 List<Project> projects;
-                projects = await response.Content.ReadAsAsync<List<Project>>();
+                projects = await response.Content.ReadAsAsync<List<Project>>(cancellationToken: cancellationToken);
 
                 return projects;
             }

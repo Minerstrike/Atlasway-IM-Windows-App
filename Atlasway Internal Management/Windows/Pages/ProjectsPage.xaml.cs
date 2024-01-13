@@ -73,13 +73,16 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
 
     public async Task GetProjects()
     {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
         try
         {
-            projects = await NetworkService.GetProjects();
+            projects = await NetworkService.GetProjects(cancellationTokenSource.Token);
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            cancellationTokenSource.Cancel();
         }
     }
 

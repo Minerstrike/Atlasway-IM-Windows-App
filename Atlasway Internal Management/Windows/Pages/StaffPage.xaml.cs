@@ -2,6 +2,7 @@
 using Atlasway_Internal_Management.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -73,9 +74,11 @@ public partial class StaffPage : Page, INotifyPropertyChanged
 
     public async Task GetStaff()
     {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
         try
         {
-            staff = await NetworkService.GetStaff();
+            staff = await NetworkService.GetStaff(cancellationTokenSource.Token);
         }
         catch (Exception ex)
         {

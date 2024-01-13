@@ -15,7 +15,7 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 public partial class ClientsPage : Page, INotifyPropertyChanged
 {
     #region Constructor
-    
+
     public ClientsPage()
     {
         InitializeComponent();
@@ -75,13 +75,16 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
 
     public async Task GetClients()
     {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
         try
         {
-            clients = await NetworkService.GetClients();
+            clients = await NetworkService.GetClients(cancellationTokenSource.Token);
         }
         catch (Exception ex)
         {
             MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            cancellationTokenSource.Cancel();
         }
     }
 
