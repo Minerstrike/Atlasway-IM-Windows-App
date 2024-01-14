@@ -12,8 +12,11 @@
     Height="450"
     MinHeight="300"
     Width="800"
+    Title="Atlasway Internal Management"
+    TitleCharacterCasing="Normal"
     ContentRendered="ObservableWindow_ContentRendered"
     FontFamily="Sans Serif Collection"
+    WindowState="Maximized"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>

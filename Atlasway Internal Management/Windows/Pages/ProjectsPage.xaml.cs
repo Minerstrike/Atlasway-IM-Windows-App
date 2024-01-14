@@ -12,6 +12,22 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// </summary>
 public partial class ProjectsPage : Page, INotifyPropertyChanged
 {
+    #region Properties
+
+    private List<Project> _projects = [];
+    public List<Project> projects
+    {
+        get => _projects;
+        set
+        {
+            _projects = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredProjects));
+        }
+    }
+
+    #endregion
+
     #region Constructor
 
     public ProjectsPage()
@@ -25,14 +41,34 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
 
     #region Bindings
 
-    private List<Project> _projects = [];
-    public List<Project> projects
+    private string _generalSearchString;
+    public string generalSearchString
     {
-        get => _projects;
+        get => _generalSearchString;
         set
         {
-            _projects = value;
+            _generalSearchString = value;
             NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredProjects));
+        }
+    }
+
+    public List<Project> filteredProjects
+    {
+        get
+        {
+            List<Project> projects = this.projects;
+
+            if (string.IsNullOrWhiteSpace(generalSearchString) is not true)
+            {
+                projects = projects.Where(
+                        project => project.ProjectNo.ToString().Contains(generalSearchString)
+                        || project.ProjectName.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
+                        || project.ClientNo.ToString().Contains(generalSearchString)
+                    ).ToList();
+            }
+
+            return projects;
         }
     }
 
@@ -46,7 +82,6 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
             NotifyPropertyChanged();
         }
     }
-
 
     #endregion
 

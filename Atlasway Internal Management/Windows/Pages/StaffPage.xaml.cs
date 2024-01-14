@@ -13,6 +13,22 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// </summary>
 public partial class StaffPage : Page, INotifyPropertyChanged
 {
+    #region Properties
+
+    private List<Staff> _staff = [];
+    public List<Staff> staff
+    {
+        get => _staff;
+        set
+        {
+            _staff = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredStaff));
+        }
+    }
+
+    #endregion
+
     #region Constructor
 
     public StaffPage()
@@ -26,14 +42,36 @@ public partial class StaffPage : Page, INotifyPropertyChanged
 
     #region Bindings
 
-    private List<Staff> _staff = [];
-    public List<Staff> staff
+    private string _generalSearchString;
+    public string generalSearchString
     {
-        get => _staff;
+        get => _generalSearchString;
         set
         {
-            _staff = value;
+            _generalSearchString = value;
             NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredStaff));
+        }
+    }
+
+    public List<Staff> filteredStaff
+    {
+        get
+        {
+            List<Staff> staff = this.staff;
+
+            if (string.IsNullOrWhiteSpace(generalSearchString) is not true)
+            {
+                staff = staff.Where(
+                        staffMember => staffMember.StaffNo.ToString().Contains(generalSearchString)
+                        || staffMember.Firstname.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
+                        || staffMember.Surname.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
+                        || staffMember.EmailAddress.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
+                        || staffMember.ContactNo.Contains(generalSearchString)
+                    ).ToList();
+            }
+
+            return staff;
         }
     }
 

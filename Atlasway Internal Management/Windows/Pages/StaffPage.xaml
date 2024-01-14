@@ -30,7 +30,8 @@
             <TextBox
                 Grid.Row="1"
                 Margin="0,5"
-                VerticalContentAlignment="Center"/>
+                VerticalContentAlignment="Center"
+                Text="{Binding generalSearchString, UpdateSourceTrigger=PropertyChanged}"/>
 
             <DataGrid
                 Grid.Row="2"
@@ -38,7 +39,7 @@
                 BorderThickness="1"
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
-                ItemsSource="{Binding staff}"
+                ItemsSource="{Binding filteredStaff}"
                 SelectedItem="{Binding selectedStaff}">
                 <DataGrid.Columns>
                     <DataGridTextColumn

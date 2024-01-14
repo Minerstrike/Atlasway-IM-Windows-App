@@ -29,16 +29,19 @@
 
             <TextBox
                 Grid.Row="1"
-                Margin="0,5"/>
+                Margin="0,5"
+                VerticalContentAlignment="Center"
+                Text="{Binding generalSearchString, UpdateSourceTrigger=PropertyChanged}"/>
 
             <DataGrid
                 Grid.Row="2"
                 BorderBrush="LightGray"
                 BorderThickness="1"
                 IsReadOnly="True"
-                ItemsSource="{Binding clients}"
+                ItemsSource="{Binding filteredClients}"
                 SelectedItem="{Binding selectedClient}"
-                AutoGenerateColumns="False">
+                AutoGenerateColumns="False"
+                MouseDoubleClick="DataGrid_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Header="Client no."

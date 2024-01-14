@@ -14,6 +14,22 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// </summary>
 public partial class ClientsPage : Page, INotifyPropertyChanged
 {
+    #region Properties
+
+    private List<Client> _clients = [];
+    public List<Client> clients
+    {
+        get => _clients;
+        set
+        {
+            _clients = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredClients));
+        }
+    }
+
+    #endregion
+
     #region Constructor
 
     public ClientsPage()
@@ -27,14 +43,35 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
 
     #region Bindings
 
-    private List<Client> _clients = [];
-    public List<Client> clients
+    private string _generalSearchString;
+    public string generalSearchString
     {
-        get => _clients;
-        set 
-        { 
-            _clients = value;
+        get => _generalSearchString;
+        set
+        {
+            _generalSearchString = value;
             NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredClients));
+        }
+    }
+
+    public List<Client> filteredClients
+    {
+        get
+        {
+            List<Client> clients = this.clients;
+
+            if (string.IsNullOrWhiteSpace(generalSearchString) is not true)
+            {
+                clients = clients.Where(
+                        client => client.ClientNo.ToString().Contains(generalSearchString)
+                        || client.ClientName.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
+                        || client.ContactNo.Contains(generalSearchString)
+                        || client.EmailAddress.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
+                    ).ToList(); 
+            }
+
+            return clients;
         }
     }
 
@@ -42,13 +79,12 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
     public Client? selectedClient
     {
         get => _selectedClient;
-        set 
+        set
         {
             _selectedClient = value;
             NotifyPropertyChanged();
         }
     }
-
 
     #endregion
 
@@ -69,7 +105,7 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -97,6 +133,23 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
     public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    #endregion
+
+    #region DataGrid events
+
+    private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (selectedClient is not null)
+        {
+            ClientsDetailWindow clientsDetailWindow = new ClientsDetailWindow(selectedClient.Value);
+            clientsDetailWindow.Show();
+        }
+        else
+        {
+            MessageBox.Show("Please select a client.", "No client selected.", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
     #endregion
