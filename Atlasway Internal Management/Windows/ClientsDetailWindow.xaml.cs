@@ -149,4 +149,19 @@ public partial class ClientsDetailWindow : ObservableWindow
     }
 
     #endregion
+
+    #region Button Events
+
+    private void BtnClientEdit_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("The ability to edit a client is not yet available", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Warning);
+    }
+
+    private void BtnProjectAdd_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("The ability to add a project is not yet available", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Warning);
+    }
+
+    #endregion
+
 }

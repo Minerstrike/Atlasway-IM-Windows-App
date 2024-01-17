@@ -18,3 +18,17 @@ public readonly struct Project
         StatusNo    = project.StatusNo;
     }
 }
+
+public readonly struct NewProject
+{
+    [JsonPropertyName("projectName")]   public string   ProjectName { get; init; }
+    [JsonPropertyName("clientno")]      public uint     ClientNo    { get; init; }
+    [JsonPropertyName("statusno")]      public uint     StatusNo    { get; init; }
+
+    internal NewProject(string projectName, uint clientNo, uint statusNo)
+    {
+        ProjectName = projectName;
+        ClientNo    = clientNo;
+        StatusNo    = statusNo;
+    }
+}

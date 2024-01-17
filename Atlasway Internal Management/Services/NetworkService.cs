@@ -1,7 +1,10 @@
 ﻿using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using Atlasway_Internal_Management.Models;
+using Newtonsoft.Json;
 
 namespace Atlasway_Internal_Management.Services;
 
@@ -66,6 +69,21 @@ public static class NetworkService
             else
             {
                 throw new Exception(response.ReasonPhrase);
+            }
+        }
+    }
+
+    public static async void PostProject(NewProject project, CancellationToken cancellationToken)
+    {
+        string json = JsonConvert.SerializeObject(project);
+
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "projects", content))
+        {
+            if (response.IsSuccessStatusCode is not true)
+            {
+                throw new Exception(response.ToString());
             }
         }
     }
