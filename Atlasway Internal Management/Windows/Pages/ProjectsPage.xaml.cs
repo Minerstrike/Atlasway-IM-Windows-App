@@ -26,6 +26,28 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         }
     }
 
+    private List<ProjectStatusType> _projectStatusTypes = [];
+    public List<ProjectStatusType> projectStatusTypes
+    {
+        get => _projectStatusTypes;
+        set
+        {
+            _projectStatusTypes = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private List<Client> _clients = [];
+    public List<Client> clients
+    {
+        get => _clients;
+        set
+        {
+            _clients = value;
+            NotifyPropertyChanged();
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -41,7 +63,7 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
 
     #region Bindings
 
-    private string _generalSearchString;
+    private string _generalSearchString = string.Empty;
     public string generalSearchString
     {
         get => _generalSearchString;
@@ -89,15 +111,23 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
 
     private async void InitialNetworkRequests(object? sender, EventArgs e)
     {
-        await RefreshData();
+        await RefreshData(refreshAll: true);
     }
 
-    internal async Task RefreshData()
+    internal async Task RefreshData(bool refreshAll)
     {
         try
         {
+            Task[] tasks = { GetProjects() };
+
+            if (refreshAll)
+            {
+                tasks.Append(GetClients());
+                tasks.Append(GetProjectTypes());
+            }
+
             await Task.WhenAll(
-                GetProjects()
+                tasks
             );
         }
         catch (Exception ex)
@@ -113,6 +143,36 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         try
         {
             projects = await NetworkService.GetProjects(cancellationTokenSource.Token);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            cancellationTokenSource.Cancel();
+        }
+    }
+
+    public async Task GetProjectTypes()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            projectStatusTypes = await NetworkService.GetProjectStatusTypes(cancellationTokenSource.Token);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            cancellationTokenSource.Cancel();
+        }
+    }
+
+    public async Task GetClients()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            clients = await NetworkService.GetClients(cancellationTokenSource.Token);
         }
         catch (Exception ex)
         {

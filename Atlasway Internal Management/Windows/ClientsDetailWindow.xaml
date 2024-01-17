@@ -9,8 +9,10 @@
     mc:Ignorable="d"
     Title="{Binding titleLabel}"
     TitleCharacterCasing="Normal"
-    Height="450" MinHeight="300"
-    Width="800" MinWidth="480"
+    Height="450"
+    MinHeight="300"
+    Width="800"
+    MinWidth="480"
     Background="#f5efef"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
@@ -26,27 +28,27 @@
                     Height="*" />
             </Grid.RowDefinitions>
 
-            <StackPanel>
-                <Label
-                    Content="{Binding clientNameLabel}"
+            <Border
+                BorderThickness="5,0,0,0"
+                BorderBrush="{DynamicResource MahApps.Brushes.Badged.Background}"
+                Padding="0"
+                Margin="0,0,0,10">
+                <TextBox
+                    Text="{Binding clientDetailsLabel, Mode=OneWay}"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Padding="10,0,0,0"
+                    Margin="0"
+                    IsReadOnly="True"
                     FontSize="15"
-                    IsManipulationEnabled="True"
-                    MouseDown="nameLabel_MouseDown" />
-                <Label
-                    Content="{Binding clientContactLabel}"
-                    FontSize="15"
-                    MouseDown="contactLabel_MouseDown" />
-                <Label
-                    Content="{Binding clientEmailAddressLabel}"
-                    FontSize="15"
-                    MouseDown="emailAddressLabel_MouseDown" />
-            </StackPanel>
+                    FontFamily="Cascadia Mono" />
+            </Border>
 
             <TextBox
                 Grid.Row="1"
-                Margin="0,5"
+                Margin="0,0,0,5"
                 VerticalContentAlignment="Center"
-                Text="{Binding generalSearchString, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding generalSearchString, UpdateSourceTrigger=PropertyChanged}" />
 
             <DataGrid
                 Grid.Row="2"
@@ -63,9 +65,6 @@
                     <DataGridTextColumn
                         Header="Project name"
                         Binding="{Binding ProjectName}" />
-                    <!--<DataGridTextColumn
-                        Header="Client"
-                        Binding="{Binding ClientNo}" />-->
                     <DataGridTextColumn
                         Header="Status"
                         Binding="{Binding StatusNo}"

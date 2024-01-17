@@ -5,12 +5,12 @@ namespace Atlasway_Internal_Management.Models;
 
 public readonly struct Client
 {
-    [JsonPropertyName("clientNo")]      public int      ClientNo        { get; init; }
+    [JsonPropertyName("clientNo")]      public uint     ClientNo        { get; init; }
     [JsonPropertyName("clientName")]    public string   ClientName      { get; init; }
     [JsonPropertyName("contactNo")]     public string?  ContactNo       { get; init; }
     [JsonPropertyName("emailAddress")]  public string?  EmailAddress    { get; init; }
 
-    public Client(int clientNo, string clientName, string? contactNo, string emailAddress)
+    public Client(uint clientNo, string clientName, string? contactNo, string emailAddress)
     {
         ClientNo        = clientNo;
         ClientName      = clientName;

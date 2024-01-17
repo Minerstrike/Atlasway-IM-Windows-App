@@ -70,5 +70,23 @@ public static class NetworkService
         }
     }
 
+    public static async Task<List<ProjectStatusType>> GetProjectStatusTypes(CancellationToken cancellationToken)
+    {
+        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "projectstatustypes"))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                List<ProjectStatusType> projectStatusTypes;
+                projectStatusTypes = await response.Content.ReadAsAsync<List<ProjectStatusType>>(cancellationToken: cancellationToken);
+
+                return projectStatusTypes;
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+    }
+
     #endregion
 }

@@ -5,11 +5,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Atlasway_Internal_Management.Windows.Pages"
+    xmlns:converters="clr-namespace:Atlasway_Internal_Management.Windows.Converters"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="#f5efef"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Page.Resources>
+        <converters:ProjectClientNoToNameConverter x:Key="ProjectClientNoToNameConverter" />
+        <converters:ProjectStatusNoToNameConverter x:Key="ProjectStatusNoToNameConverter" />
+    </Page.Resources>
 
     <Border
         Padding="10">
@@ -31,7 +37,7 @@
                 Grid.Row="1"
                 Margin="0,5"
                 VerticalContentAlignment="Center"
-                Text="{Binding generalSearchString, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding generalSearchString, UpdateSourceTrigger=PropertyChanged}" />
 
             <DataGrid
                 Grid.Row="2"
@@ -44,17 +50,37 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Header="Project no."
-                        Binding="{Binding ProjectNo}"/>
+                        Binding="{Binding ProjectNo}" />
                     <DataGridTextColumn
                         Header="Project name"
-                        Binding="{Binding ProjectName}"/>
+                        Binding="{Binding ProjectName}" />
                     <DataGridTextColumn
-                        Header="Client"
-                        Binding="{Binding ClientNo}"/>
+                        Header="Client">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding
+                                Converter="{StaticResource ProjectClientNoToNameConverter}">
+                                <Binding
+                                    Path="." />
+                                <Binding
+                                    Path="clients"
+                                    RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Page}" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
                     <DataGridTextColumn
                         Header="Status"
-                        Binding="{Binding StatusNo}"
-                        Width="*" />
+                        Width="*">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding
+                                Converter="{StaticResource ProjectStatusNoToNameConverter}">
+                                <Binding
+                                    Path="." />
+                                <Binding
+                                    Path="projectStatusTypes"
+                                    RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Page}" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

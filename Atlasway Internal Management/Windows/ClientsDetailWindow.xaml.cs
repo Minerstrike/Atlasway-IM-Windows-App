@@ -27,9 +27,7 @@ public partial class ClientsDetailWindow : ObservableWindow
             _client = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(titleLabel));
-            NotifyPropertyChanged(nameof(clientNameLabel));
-            NotifyPropertyChanged(nameof(clientContactLabel));
-            NotifyPropertyChanged(nameof(clientEmailAddressLabel));
+            NotifyPropertyChanged(nameof(clientDetailsLabel));
         }
     }
 
@@ -63,11 +61,12 @@ public partial class ClientsDetailWindow : ObservableWindow
     #region Bindings
 
     public string titleLabel => $"{client.ClientName} detail";
-    public string clientNameLabel => $"Client: {client.ClientName}";
-    public string clientContactLabel => $"Contact: {client.ContactNo}";
-    public string clientEmailAddressLabel => $"Email address: {client.EmailAddress}";
+    public string clientDetailsLabel => 
+        $"Client: {client.ClientName}\n" +
+        $"Contact: {client.ContactNo}\n" +
+        $"Email address: {client.EmailAddress}";
 
-    private string _generalSearchString;
+    private string _generalSearchString = string.Empty;
     public string generalSearchString
     {
         get => _generalSearchString;
@@ -147,34 +146,6 @@ public partial class ClientsDetailWindow : ObservableWindow
             MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
             cancellationTokenSource.Cancel();
         }
-    }
-
-    #endregion
-
-    #region Label events
-
-    private void nameLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        Clipboard.SetText($"{client.ClientName}");
-        new ToastContentBuilder()
-            .AddText($"Copied {client.ClientName}")
-            .Show();
-    }
-
-    private void contactLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        Clipboard.SetText($"{client.ContactNo}");
-        new ToastContentBuilder()
-            .AddText($"Copied {client.ContactNo}")
-            .Show();
-    }
-
-    private void emailAddressLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        Clipboard.SetText($"{client.EmailAddress}");
-        new ToastContentBuilder()
-            .AddText($"Copied {client.EmailAddress}")
-            .Show();
     }
 
     #endregion
