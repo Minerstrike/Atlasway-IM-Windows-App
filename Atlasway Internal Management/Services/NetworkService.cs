@@ -73,7 +73,7 @@ public static class NetworkService
         }
     }
 
-    public static async void PostProject(NewProject project, CancellationToken cancellationToken)
+    public static async Task PostProject(NewProject project, CancellationToken cancellationToken)
     {
         string json = JsonConvert.SerializeObject(project);
 

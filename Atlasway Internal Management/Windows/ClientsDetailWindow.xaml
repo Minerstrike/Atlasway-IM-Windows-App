@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Atlasway_Internal_Management.Windows"
     xmlns:core="clr-namespace:Atlasway_Internal_Management.Core"
+    xmlns:converters="clr-namespace:Atlasway_Internal_Management.Windows.Converters"
     mc:Ignorable="d"
     Title="{Binding titleLabel}"
     TitleCharacterCasing="Normal"
@@ -15,6 +16,11 @@
     MinWidth="480"
     Background="#f5efef"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Window.Resources>
+        <converters:ProjectStatusNoToNameConverter
+            x:Key="ProjectStatusNoToNameConverter" />
+    </Window.Resources>
 
     <Border
         Padding="10">
@@ -31,8 +37,10 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Border
@@ -42,7 +50,7 @@
                 Margin="0,0,0,10">
                 <TextBox
                     Text="{Binding clientDetailsLabel, Mode=OneWay}"
-                    d:Text = "Client: #####"
+                    d:Text="Client: #####"
                     BorderThickness="0"
                     Background="Transparent"
                     Padding="10,0,0,0"
@@ -70,7 +78,7 @@
             </Button>
 
             <TextBox
-                Grid.Row="1" 
+                Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Margin="0,0,0,5"
                 VerticalContentAlignment="Center"
@@ -94,13 +102,24 @@
                         Binding="{Binding ProjectName}" />
                     <DataGridTextColumn
                         Header="Status"
-                        Binding="{Binding StatusNo}"
-                        Width="*" />
+                        Width="*">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding
+                                Converter="{StaticResource ProjectStatusNoToNameConverter}">
+                                <Binding
+                                    Path="." />
+                                <Binding
+                                    Path="projectStatusTypes"
+                                    RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" />
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
             <Button
-                Grid.Row="4" Grid.Column="1"
+                Grid.Row="4"
+                Grid.Column="1"
                 Height="40"
                 Width="40"
                 Margin="10,10,0,0"

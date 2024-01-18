@@ -1,0 +1,63 @@
+﻿<core:ObservableWindow
+    x:Class="Atlasway_Internal_Management.Windows.NewProjectWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="clr-namespace:Atlasway_Internal_Management.Core"
+    xmlns:local="clr-namespace:Atlasway_Internal_Management.Windows"
+    xmlns:converters="clr-namespace:Atlasway_Internal_Management.Windows.Converters"
+    mc:Ignorable="d"
+    Title="Add a new project"
+    TitleCharacterCasing="Normal"
+    Height="150"
+    Width="300"
+    DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
+
+    <Border
+        Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="100" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Content="Project name: "/>
+            <TextBox
+                Grid.Column="1"
+                Margin="0,0,0,10"
+                Text="{Binding projectName}"/>
+
+            <Button
+                Grid.Row="100"
+                Grid.Column="100"
+                Height="40"
+                Width="40"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                ToolTip="Add project"
+                Click="BtnProjectAdd_Click">
+                <Path
+                    Stretch="Uniform"
+                    Fill="Gray"
+                    Data="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+            </Button>
+        </Grid>
+    </Border>
+</core:ObservableWindow>

@@ -22,7 +22,7 @@ public partial class ClientsDetailWindow : ObservableWindow
     public Client client
     {
         get => _client;
-        set 
+        set
         {
             _client = value;
             NotifyPropertyChanged();
@@ -43,6 +43,18 @@ public partial class ClientsDetailWindow : ObservableWindow
         }
     }
 
+    private List<ProjectStatusType> _projectStatusTypes;
+    public List<ProjectStatusType> projectStatusTypes
+    {
+        get => _projectStatusTypes;
+        set
+        {
+            _projectStatusTypes = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+
     #endregion
 
     #region Constrcutor
@@ -61,7 +73,7 @@ public partial class ClientsDetailWindow : ObservableWindow
     #region Bindings
 
     public string titleLabel => $"{client.ClientName} detail";
-    public string clientDetailsLabel => 
+    public string clientDetailsLabel =>
         $"Client: {client.ClientName}\n" +
         $"Contact: {client.ContactNo}\n" +
         $"Email address: {client.EmailAddress}";
@@ -116,16 +128,21 @@ public partial class ClientsDetailWindow : ObservableWindow
 
     private async void InitialNetworkRequests(object? sender, EventArgs e)
     {
-        await RefreshData();
+        await RefreshData(true);
     }
 
-    internal async Task RefreshData()
+    internal async Task RefreshData(bool refreshAll = false)
     {
         try
         {
-            await Task.WhenAll(
-                GetProjects()
-            );
+            Task[] tasks = { GetProjects() };
+
+            if (refreshAll)
+            {
+                tasks.Append(GetProjectStatusTypes());
+            }
+
+            await Task.WhenAll(tasks);
         }
         catch (Exception ex)
         {
@@ -148,6 +165,21 @@ public partial class ClientsDetailWindow : ObservableWindow
         }
     }
 
+    public async Task GetProjectStatusTypes()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            projectStatusTypes = await NetworkService.GetProjectStatusTypes(cancellationTokenSource.Token);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            cancellationTokenSource.Cancel();
+        }
+    }
+
     #endregion
 
     #region Button Events
@@ -157,9 +189,10 @@ public partial class ClientsDetailWindow : ObservableWindow
         MessageBox.Show("The ability to edit a client is not yet available", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Warning);
     }
 
-    private void BtnProjectAdd_Click(object sender, RoutedEventArgs e)
+    private async void BtnProjectAdd_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("The ability to add a project is not yet available", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Warning);
+        new NewProjectWindow(client).ShowDialog();
+        await RefreshData();
     }
 
     #endregion
