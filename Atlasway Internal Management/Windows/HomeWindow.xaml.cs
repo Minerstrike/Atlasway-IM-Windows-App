@@ -1,10 +1,5 @@
 ﻿using Atlasway_Internal_Management.Controls;
 using Atlasway_Internal_Management.Core;
-using Atlasway_Internal_Management.Windows.Pages;
-using MahApps.Metro.Controls;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Atlasway_Internal_Management.Windows;
 

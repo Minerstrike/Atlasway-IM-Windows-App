@@ -2,11 +2,11 @@
 using Atlasway_Internal_Management.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Atlasway_Internal_Management.Windows.Pages;
+
 
 /// <summary>
 /// Interaction logic for StaffPage.xaml
@@ -134,6 +134,15 @@ public partial class StaffPage : Page, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    #endregion
+
+    #region Button events
+
+    private void BtnStaffAdd_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Implementation for adding a staff member is not yet available", "Feature in development", MessageBoxButton.OK, MessageBoxImage.Information);
+    } 
 
     #endregion
 }

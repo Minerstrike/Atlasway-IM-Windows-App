@@ -153,4 +153,13 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
     }
 
     #endregion
+
+    #region Button events
+    
+    private void BtnClientAdd_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Implementation for adding a client is not yet available", "Feature in development", MessageBoxButton.OK, MessageBoxImage.Information);
+    } 
+
+    #endregion
 }

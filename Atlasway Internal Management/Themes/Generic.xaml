@@ -44,12 +44,12 @@
                             <Setter
                                 Property="Background"
                                 TargetName="back"
-                                Value="#ffdddd" />
+                                Value="{DynamicResource MahApps.Brushes.Accent4}" />
 
                             <Setter
                                 Property="Fill"
                                 TargetName="icon"
-                                Value="#ff5f5f" />
+                                Value="{DynamicResource MahApps.Brushes.Accent}" />
                         </Trigger>
 
                         <Trigger
@@ -58,12 +58,12 @@
                             <Setter
                                 Property="Background"
                                 TargetName="back"
-                                Value="#ffdddd" />
+                                Value="{DynamicResource MahApps.Brushes.Accent4}" />
 
                             <Setter
                                 Property="Fill"
                                 TargetName="icon"
-                                Value="#ff3333" />
+                                Value="{DynamicResource MahApps.Brushes.Accent2}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
