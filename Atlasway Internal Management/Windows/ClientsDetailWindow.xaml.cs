@@ -43,7 +43,7 @@ public partial class ClientsDetailWindow : ObservableWindow
         }
     }
 
-    private List<ProjectStatusType> _projectStatusTypes;
+    private List<ProjectStatusType> _projectStatusTypes = [];
     public List<ProjectStatusType> projectStatusTypes
     {
         get => _projectStatusTypes;
@@ -73,10 +73,11 @@ public partial class ClientsDetailWindow : ObservableWindow
     #region Bindings
 
     public string titleLabel => $"{client.ClientName} detail";
+
     public string clientDetailsLabel =>
-        $"Client: {client.ClientName}\n" +
-        $"Contact: {client.ContactNo}\n" +
-        $"Email address: {client.EmailAddress}";
+        $"Client        : {client.ClientName}\n"    +
+        $"Contact       : {client.ContactNo}\n"     +
+        $"Email address : {client.EmailAddress}";
 
     private string _generalSearchString = string.Empty;
     public string generalSearchString
@@ -184,9 +185,10 @@ public partial class ClientsDetailWindow : ObservableWindow
 
     #region Button Events
 
-    private void BtnClientEdit_Click(object sender, RoutedEventArgs e)
+    private async void BtnClientEdit_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("The ability to edit a client is not yet available", "Feature not implemented", MessageBoxButton.OK, MessageBoxImage.Warning);
+        new EditClientWindow(client).ShowDialog();
+        await RefreshData(true);
     }
 
     private async void BtnProjectAdd_Click(object sender, RoutedEventArgs e)

@@ -21,6 +21,8 @@ public partial class NewProjectWindow : ObservableWindow
         {
             _client = value;
             NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(titleLabel));
+            NotifyPropertyChanged(nameof(clientDetailsLabel));
         }
     }
 
@@ -41,7 +43,17 @@ public partial class NewProjectWindow : ObservableWindow
 
     #region Bindings
 
-    private string _projectName;
+    public string titleLabel => $"Add new project for {client.ClientName}";
+
+    public string clientDetailsLabel =>
+        $"Client        : {client.ClientName}\n" +
+        $"Contact       : {client.ContactNo}\n" +
+        $"Email address : {client.EmailAddress}";
+
+    public string projectDetailsLabel =>
+        $"Status        : Incomplete";
+
+    private string _projectName = string.Empty;
     public string projectName
     {
         get => _projectName;

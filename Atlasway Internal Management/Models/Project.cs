@@ -6,7 +6,7 @@ namespace Atlasway_Internal_Management.Models;
 public readonly struct Project
 {
     [JsonPropertyName("projectNo")]     public uint     ProjectNo   { get; init; }
-    [JsonPropertyName("projectName")]   public string?  ProjectName { get; init; }
+    [JsonPropertyName("projectName")]   public string   ProjectName { get; init; }
     [JsonPropertyName("clientno")]      public uint     ClientNo    { get; init; }
     [JsonPropertyName("statusno")]      public uint     StatusNo    { get; init; }
 

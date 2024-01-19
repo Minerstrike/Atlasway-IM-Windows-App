@@ -37,6 +37,21 @@ public static class NetworkService
         }
     }
 
+    public static async Task UpdateClient(Client client, CancellationToken cancellationToken)
+    {
+        string json = JsonConvert.SerializeObject(client);
+
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using (HttpResponseMessage response = await ApiHelper.ApiClient.PutAsync(baseUri + "clients", content, cancellationToken))
+        {
+            if (response.IsSuccessStatusCode is not true)
+            {
+                throw new Exception(response.ToString());
+            }
+        }
+    }
+
     public static async Task<List<Staff>> GetStaff(CancellationToken cancellationToken)
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "staff"))
@@ -79,7 +94,7 @@ public static class NetworkService
 
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "projects", content))
+        using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "projects", content, cancellationToken))
         {
             if (response.IsSuccessStatusCode is not true)
             {
