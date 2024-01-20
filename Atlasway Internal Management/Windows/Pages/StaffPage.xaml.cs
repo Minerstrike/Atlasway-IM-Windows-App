@@ -141,7 +141,7 @@ public partial class StaffPage : Page, INotifyPropertyChanged
 
     private void BtnStaffAdd_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Implementation for adding a staff member is not yet available", "Feature in development", MessageBoxButton.OK, MessageBoxImage.Information);
+        new NewStaffWindow().Show();
     } 
 
     #endregion

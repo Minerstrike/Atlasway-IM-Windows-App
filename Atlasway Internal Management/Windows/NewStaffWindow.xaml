@@ -1,0 +1,107 @@
+﻿<core:ObservableWindow
+    x:Class="Atlasway_Internal_Management.Windows.NewStaffWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="clr-namespace:Atlasway_Internal_Management.Core"
+    xmlns:local="clr-namespace:Atlasway_Internal_Management.Windows"
+    mc:Ignorable="d"
+    Title="Add new staff member"
+    TitleCharacterCasing="Normal"
+    Height="300"
+    Width="500"
+    DataContext="{Binding RelativeSource={RelativeSource self}}">
+
+    <Border
+        Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="Auto" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Content="Firstname: " />
+            <TextBox
+                Grid.Column="1"
+                Width="300"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                Text="{Binding firstname, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label
+                Grid.Row="1"
+                Content="Surname: " />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="300"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                Text="{Binding lastname, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label
+                Grid.Row="2"
+                Content="Contact number: " />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="200"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                Text="{Binding contactNo, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label
+                Grid.Row="3"
+                Content="Email address: " />
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="300"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
+                Text="{Binding emailAddress, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button
+                Grid.Row="5"
+                Grid.Column="1"
+                Height="40"
+                Width="40"
+                Margin="10,10,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                ToolTip="Add Staff member"
+                Click="StaffPost_click">
+                <Path
+                    Stretch="Uniform"
+                    Fill="Green"
+                    Data="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+            </Button>
+        </Grid>
+    </Border>
+</core:ObservableWindow>

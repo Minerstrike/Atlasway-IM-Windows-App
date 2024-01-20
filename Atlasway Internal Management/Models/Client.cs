@@ -17,8 +17,15 @@ public readonly struct Client
         ContactNo       = contactNo;
         EmailAddress    = emailAddress;
     }
+}
 
-    public Client(string clientName, string? contactNo, string? emailAddress)
+public readonly struct NewClient
+{
+    [JsonPropertyName("clientName")]    public string   ClientName      { get; init; }
+    [JsonPropertyName("contactNo")]     public string?  ContactNo       { get; init; }
+    [JsonPropertyName("emailAddress")]  public string?  EmailAddress    { get; init; }
+
+    public NewClient(string clientName, string? contactNo, string? emailAddress)
     {
         ClientName      = clientName;
         ContactNo       = contactNo;
