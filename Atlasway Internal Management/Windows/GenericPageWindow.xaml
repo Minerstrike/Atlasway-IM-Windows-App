@@ -1,0 +1,21 @@
+﻿<core:ObservableWindow
+    x:Class="Atlasway_Internal_Management.Windows.GenericPageWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="clr-namespace:Atlasway_Internal_Management.Core"
+    xmlns:local="clr-namespace:Atlasway_Internal_Management.Windows"
+    mc:Ignorable="d"
+    Title="GenericPageWindow"
+    Height="450"
+    Width="800">
+    
+    <Grid>
+        <Frame
+            x:Name="PageViewer"
+            Grid.Column="1"
+            Background="LightGray"
+            NavigationUIVisibility="Hidden" />
+    </Grid>
+</core:ObservableWindow>
