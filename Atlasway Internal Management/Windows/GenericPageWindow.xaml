@@ -7,9 +7,11 @@
     xmlns:core="clr-namespace:Atlasway_Internal_Management.Core"
     xmlns:local="clr-namespace:Atlasway_Internal_Management.Windows"
     mc:Ignorable="d"
-    Title="GenericPageWindow"
-    Height="450"
-    Width="800">
+    Title="{Binding titleLabel}"
+    TitleCharacterCasing="Normal"
+    d:Height="450"
+    d:Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     
     <Grid>
         <Frame

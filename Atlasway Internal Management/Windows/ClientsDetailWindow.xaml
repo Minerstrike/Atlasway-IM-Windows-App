@@ -17,10 +17,10 @@
     Background="#f5efef"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <converters:ProjectStatusNoToNameConverter
             x:Key="ProjectStatusNoToNameConverter" />
-    </Window.Resources>
+    </Window.Resources>-->
 
     <!--<Border
         Padding="10">
@@ -140,9 +140,12 @@
         
     </Border>-->
 
-    <Frame
+    <!--<Frame
         x:Name="PageViewer"
         Grid.Column="1"
         Background="LightGray"
-        NavigationUIVisibility="Hidden" />
+        NavigationUIVisibility="Hidden" />-->
+    <Grid>
+        
+    </Grid>
 </core:ObservableWindow>

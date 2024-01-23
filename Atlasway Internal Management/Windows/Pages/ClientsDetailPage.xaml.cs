@@ -71,8 +71,6 @@ public partial class ClientsDetailPage : BasePage
 
     #region Bindings
 
-    public override string title => $"{client.ClientName} detail LIVE";
-
     public string clientDetailsLabel =>
         $"Client        : {client.ClientName}\n" +
         $"Contact       : {client.ContactNo}\n" +
@@ -195,6 +193,41 @@ public partial class ClientsDetailPage : BasePage
         new NewProjectWindow(client).ShowDialog();
         await RefreshData();
     }
+
+    #endregion
+
+    #region ITitledObject
+
+    public override string title => $"{client.ClientName} detail";
+
+    #endregion
+
+    #region ITwoDimentional
+
+    private double _height = 450;
+    public override double height
+    {
+        get => _height;
+        set
+        {
+            _height = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private double _width = 800;
+    public override double width
+    {
+        get => _width;
+        set
+        {
+            _width = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    public override double minHeight => 300;
+    public override double minWidth => 480;
 
     #endregion
 }

@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Atlasway Internal Management Logo-nobg-cropped.png" />
     <None Remove="Images\Atlasway Internal Management Logo-nobg.png" />
     <None Remove="Images\Atlasway Internal Management Logo.png" />
   </ItemGroup>
@@ -27,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Atlasway Internal Management Logo-nobg-cropped.png" />
     <Resource Include="Images\Atlasway Internal Management Logo-nobg.png" />
     <Resource Include="Images\Atlasway Internal Management Logo.png" />
   </ItemGroup>

@@ -12,14 +12,11 @@
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
         <Image
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Source="/Images/Atlasway Internal Management Logo-nobg.png"/>
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="30,30,0,0"
+            Height="80"
+            Source="/Images/Atlasway Internal Management Logo-nobg-cropped.png"/>
     </Grid>
 </Page>

@@ -1,9 +1,8 @@
-﻿using Atlasway_Internal_Management.Models;
+﻿using Atlasway_Internal_Management.Core;
+using Atlasway_Internal_Management.Models;
 using Atlasway_Internal_Management.Services;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Atlasway_Internal_Management.Windows.Pages;
 
@@ -11,7 +10,7 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// <summary>
 /// Interaction logic for ClientsPage.xaml
 /// </summary>
-public partial class ClientsPage : Page, INotifyPropertyChanged
+public partial class ClientsPage : BasePage, INotifyPropertyChanged
 {
     #region Properties
 
@@ -36,13 +35,24 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
+
+        //this.isPopable = isPopable;
+    }
+
+    public ClientsPage(bool isPopable)
+    {
+        InitializeComponent();
+
+        Loaded += InitialNetworkRequests;
+
+        this.isPopable = isPopable;
     }
 
     #endregion
 
     #region Bindings
 
-    private string _generalSearchString;
+    private string _generalSearchString = string.Empty;
     public string generalSearchString
     {
         get => _generalSearchString;
@@ -51,6 +61,33 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
             _generalSearchString = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(filteredClients));
+        }
+    }
+
+    private bool _isPopable = true;
+    public bool isPopable
+    {
+        get => _isPopable;
+        set
+        {
+            _isPopable = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(popToWindowButtonVisibility));
+        }
+    }
+
+    public Visibility popToWindowButtonVisibility
+    {
+        get
+        {
+            if (_isPopable)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
         }
     }
 
@@ -67,7 +104,7 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
                         || client.ClientName.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
                         || client.ContactNo.Contains(generalSearchString)
                         || client.EmailAddress.IndexOf(generalSearchString, StringComparison.OrdinalIgnoreCase) != -1
-                    ).ToList(); 
+                    ).ToList();
             }
 
             return clients;
@@ -125,25 +162,15 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
 
     #endregion
 
-    #region INotifyPropertyChnaged
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    #endregion
-
     #region DataGrid events
 
     private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (selectedClient is not null)
         {
-            ClientsDetailWindow clientsDetailWindow = new ClientsDetailWindow(selectedClient.Value);
-            clientsDetailWindow.Show();
+            //ClientsDetailWindow clientsDetailWindow = new ClientsDetailWindow(selectedClient.Value);
+            //clientsDetailWindow.Show();
+            new GenericPageWindow(new ClientsDetailPage(selectedClient.Value)).Show();
         }
         else
         {
@@ -154,11 +181,22 @@ public partial class ClientsPage : Page, INotifyPropertyChanged
     #endregion
 
     #region Button events
-    
+
     private void BtnClientAdd_Click(object sender, RoutedEventArgs e)
     {
         new NewClientWindow().Show();
     }
+
+    private void PopToWindow_Click(object sender, RoutedEventArgs e)
+    {
+        new GenericPageWindow(new ClientsPage(isPopable: false)).Show();
+    }
+
+    #endregion
+
+    #region ITitledObject
+
+    public override string title => $"Client window";
 
     #endregion
 }

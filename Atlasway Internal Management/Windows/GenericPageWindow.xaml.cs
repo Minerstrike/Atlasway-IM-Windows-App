@@ -1,6 +1,5 @@
 ﻿using Atlasway_Internal_Management.Core;
-using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Atlasway_Internal_Management.Windows;
 
@@ -34,7 +33,37 @@ public partial class GenericPageWindow : ObservableWindow
         this.page = page;
 
         PageViewer.Navigate(page);
-    } 
+
+        SetBinding(WidthProperty, new Binding("width")
+        {
+            Source = page,
+            Mode = BindingMode.TwoWay
+        });
+
+        SetBinding(HeightProperty, new Binding("height")
+        {
+            Source = page,
+            Mode = BindingMode.TwoWay
+        });
+
+        SetBinding(MinWidthProperty, new Binding("minWidth")
+        {
+            Source = page,
+            Mode = BindingMode.OneWay
+        });
+
+        SetBinding(MinHeightProperty, new Binding("minHeight")
+        {
+            Source = page,
+            Mode = BindingMode.OneWay
+        });
+    }
+
+    #endregion
+
+    #region ITitledObject
+
+    public string titleLabel => page is not null ? page.title : "Generic window"; 
 
     #endregion
 }

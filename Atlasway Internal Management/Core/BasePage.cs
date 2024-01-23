@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace Atlasway_Internal_Management.Core;
 
 
-public abstract class BasePage : Page, INotifyPropertyChanged, ITitledObject
+public abstract class BasePage : Page, INotifyPropertyChanged, ITitledObject, ITwoDimentional
 {
     #region INotifyPropertyChnaged
 
@@ -22,6 +22,35 @@ public abstract class BasePage : Page, INotifyPropertyChanged, ITitledObject
     #region ITitledObject
 
     public virtual string title => throw new NotImplementedException();
+
+    #endregion
+
+    #region ITwoDimentional
+
+    private double _height = 450;
+    public virtual double height
+    {
+        get => _height;
+        set
+        {
+            _height = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private double _width = 800;
+    public virtual double width
+    {
+        get => _width;
+        set
+        {
+            _width = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    public virtual double minHeight => 0;
+    public virtual double minWidth => 0;
 
     #endregion
 }
