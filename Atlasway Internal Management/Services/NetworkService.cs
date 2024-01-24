@@ -22,17 +22,12 @@ public static class NetworkService
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "clients", cancellationToken))
         {
-            if (response.IsSuccessStatusCode)
-            {
-                List<Client> clients;
-                clients = await response.Content.ReadAsAsync<List<Client>>(cancellationToken: cancellationToken);
+            response.EnsureSuccessStatusCode();
 
-                return clients;
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            List<Client> clients;
+            clients = await response.Content.ReadAsAsync<List<Client>>(cancellationToken: cancellationToken);
+
+            return clients;
         }
     }
 
@@ -44,10 +39,7 @@ public static class NetworkService
 
         using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "clients", content, cancellationToken))
         {
-            if (response.IsSuccessStatusCode is not true)
-            {
-                throw new Exception(response.ToString());
-            }
+            response.EnsureSuccessStatusCode();
         }
     }
 
@@ -59,10 +51,7 @@ public static class NetworkService
 
         using (HttpResponseMessage response = await ApiHelper.ApiClient.PutAsync(baseUri + "clients", content, cancellationToken))
         {
-            if (response.IsSuccessStatusCode is not true)
-            {
-                throw new Exception(response.ToString());
-            }
+            response.EnsureSuccessStatusCode();
         }
     }
 
@@ -70,17 +59,12 @@ public static class NetworkService
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "staff"))
         {
-            if (response.IsSuccessStatusCode)
-            {
-                List<Staff> staff;
-                staff = await response.Content.ReadAsAsync<List<Staff>>(cancellationToken: cancellationToken);
+            response.EnsureSuccessStatusCode();
 
-                return staff;
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            List<Staff> staff;
+            staff = await response.Content.ReadAsAsync<List<Staff>>(cancellationToken: cancellationToken);
+
+            return staff;
         }
     }
 
@@ -92,20 +76,17 @@ public static class NetworkService
 
         using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "staff", content, cancellationToken))
         {
-            if (response.IsSuccessStatusCode is not true)
-            {
-                throw new Exception(response.ToString());
-            }
+            response.EnsureSuccessStatusCode();
         }
     }
 
     public static async Task<List<Project>> GetProjects(CancellationToken cancellationToken)
     {
-        using (var request  = new HttpRequestMessage(HttpMethod.Get, baseUri + "projectsV2"))
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUri + "projectsV2"))
         {
             request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
 
-            var response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
 
             response.EnsureSuccessStatusCode();
 
@@ -113,15 +94,6 @@ public static class NetworkService
             projects = await response.Content.ReadAsAsync<List<Project>>(cancellationToken: cancellationToken);
 
             return projects;
-
-            //if (response.IsSuccessStatusCode)
-            //{
-                
-            //}
-            //else
-            //{
-            //    throw new UnauthorizedAccessException(response.StatusCode.ToString());
-            //}
         }
     }
 
@@ -133,10 +105,7 @@ public static class NetworkService
 
         using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "projects", content, cancellationToken))
         {
-            if (response.IsSuccessStatusCode is not true)
-            {
-                throw new Exception(response.ToString());
-            }
+            response.EnsureSuccessStatusCode();
         }
     }
 
@@ -144,19 +113,15 @@ public static class NetworkService
     {
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "projectstatustypes"))
         {
-            if (response.IsSuccessStatusCode)
-            {
-                List<ProjectStatusType> projectStatusTypes;
-                projectStatusTypes = await response.Content.ReadAsAsync<List<ProjectStatusType>>(cancellationToken: cancellationToken);
+            response.EnsureSuccessStatusCode();
 
-                return projectStatusTypes;
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            List<ProjectStatusType> projectStatusTypes;
+            projectStatusTypes = await response.Content.ReadAsAsync<List<ProjectStatusType>>(cancellationToken: cancellationToken);
+
+            return projectStatusTypes; throw new Exception(response.ReasonPhrase);
         }
     }
+
 
     #endregion
 }

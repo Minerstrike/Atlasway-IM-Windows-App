@@ -132,7 +132,7 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Message, "Failure to access data", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -146,7 +146,7 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, "Failure to access data", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, "Failure to get data", MessageBoxButton.OK, MessageBoxImage.Error);
             cancellationTokenSource.Cancel();
         }
     }
@@ -161,7 +161,7 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, "Failure to get data", MessageBoxButton.OK, MessageBoxImage.Error);
             cancellationTokenSource.Cancel();
         }
     }
@@ -176,7 +176,7 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, "Failure to get data", MessageBoxButton.OK, MessageBoxImage.Error);
             cancellationTokenSource.Cancel();
         }
     }
