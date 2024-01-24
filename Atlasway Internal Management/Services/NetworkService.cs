@@ -1,9 +1,8 @@
 ﻿using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Runtime.CompilerServices;
+using System.Net.Http.Headers;
 using System.Text;
-using System.Threading;
 using Atlasway_Internal_Management.Models;
+using AtlaswayInternalAPI.Authentication;
 using Newtonsoft.Json;
 
 namespace Atlasway_Internal_Management.Services;
@@ -21,7 +20,7 @@ public static class NetworkService
 
     public static async Task<List<Client>> GetClients(CancellationToken cancellationToken)
     {
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "clients"))
+        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "clients", cancellationToken))
         {
             if (response.IsSuccessStatusCode)
             {
@@ -102,19 +101,27 @@ public static class NetworkService
 
     public static async Task<List<Project>> GetProjects(CancellationToken cancellationToken)
     {
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "projects"))
+        using (var request  = new HttpRequestMessage(HttpMethod.Get, baseUri + "projectsV2"))
         {
-            if (response.IsSuccessStatusCode)
-            {
-                List<Project> projects;
-                projects = await response.Content.ReadAsAsync<List<Project>>(cancellationToken: cancellationToken);
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
 
-                return projects;
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            var response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
+
+            response.EnsureSuccessStatusCode();
+
+            List<Project> projects;
+            projects = await response.Content.ReadAsAsync<List<Project>>(cancellationToken: cancellationToken);
+
+            return projects;
+
+            //if (response.IsSuccessStatusCode)
+            //{
+                
+            //}
+            //else
+            //{
+            //    throw new UnauthorizedAccessException(response.StatusCode.ToString());
+            //}
         }
     }
 

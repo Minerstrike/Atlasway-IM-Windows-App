@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+Atlasway Internal Management/appsettings.json
+Atlasway Internal Management/Authentication/AuthConstants.cs
