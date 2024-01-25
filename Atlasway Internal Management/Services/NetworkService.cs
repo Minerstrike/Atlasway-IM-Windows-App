@@ -18,10 +18,16 @@ public static class NetworkService
 
     #region Requests
 
+    #region Clients
+
     public static async Task<List<Client>> GetClients(CancellationToken cancellationToken)
     {
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "clients", cancellationToken))
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUri + "clientsV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
+
             response.EnsureSuccessStatusCode();
 
             List<Client> clients;
@@ -37,8 +43,13 @@ public static class NetworkService
 
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "clients", content, cancellationToken))
+        using (var request = new HttpRequestMessage(HttpMethod.Post, baseUri + "clientsV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+            request.Content = content;
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request: request, cancellationToken: cancellationToken);
+
             response.EnsureSuccessStatusCode();
         }
     }
@@ -49,11 +60,20 @@ public static class NetworkService
 
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.PutAsync(baseUri + "clients", content, cancellationToken))
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, baseUri + "clientsV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+            request.Content = content;
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request: request, cancellationToken: cancellationToken);
+
             response.EnsureSuccessStatusCode();
         }
     }
+
+    #endregion
+
+    #region Staff
 
     public static async Task<List<Staff>> GetStaff(CancellationToken cancellationToken)
     {
@@ -80,6 +100,10 @@ public static class NetworkService
         }
     }
 
+    #endregion
+
+    #region Projects
+
     public static async Task<List<Project>> GetProjects(CancellationToken cancellationToken)
     {
         using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUri + "projectsV2"))
@@ -103,25 +127,35 @@ public static class NetworkService
 
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "projects", content, cancellationToken))
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, baseUri + "projectsV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+            request.Content = content;
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
+
             response.EnsureSuccessStatusCode();
         }
     }
 
     public static async Task<List<ProjectStatusType>> GetProjectStatusTypes(CancellationToken cancellationToken)
     {
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "projectstatustypes"))
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUri + "projectstatustypesV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
+
             response.EnsureSuccessStatusCode();
 
             List<ProjectStatusType> projectStatusTypes;
-            projectStatusTypes = await response.Content.ReadAsAsync<List<ProjectStatusType>>(cancellationToken: cancellationToken);
+            projectStatusTypes = await response.Content.ReadAsAsync<List<ProjectStatusType>>(cancellationToken);
 
-            return projectStatusTypes; throw new Exception(response.ReasonPhrase);
+            return projectStatusTypes;
         }
     }
 
+    #endregion
 
     #endregion
 }
