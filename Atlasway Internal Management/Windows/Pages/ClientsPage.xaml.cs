@@ -26,6 +26,18 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         }
     }
 
+    private bool _isPopable = true;
+    public bool isPopable
+    {
+        get => _isPopable;
+        set
+        {
+            _isPopable = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(popToWindowButtonVisibility));
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -35,8 +47,6 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
-
-        //this.isPopable = isPopable;
     }
 
     public ClientsPage(bool isPopable)
@@ -64,23 +74,11 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         }
     }
 
-    private bool _isPopable = true;
-    public bool isPopable
-    {
-        get => _isPopable;
-        set
-        {
-            _isPopable = value;
-            NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(popToWindowButtonVisibility));
-        }
-    }
-
     public Visibility popToWindowButtonVisibility
     {
         get
         {
-            if (_isPopable)
+            if (isPopable)
             {
                 return Visibility.Visible;
             }
@@ -196,7 +194,7 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
 
     #region ITitledObject
 
-    public override string title => $"Client window";
+    public override string title => $"Clients";
 
     #endregion
 }

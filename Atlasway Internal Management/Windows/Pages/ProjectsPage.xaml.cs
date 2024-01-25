@@ -1,4 +1,5 @@
-﻿using Atlasway_Internal_Management.Models;
+﻿using Atlasway_Internal_Management.Core;
+using Atlasway_Internal_Management.Models;
 using Atlasway_Internal_Management.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,7 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// <summary>
 /// Interaction logic for ProjectsPage.xaml
 /// </summary>
-public partial class ProjectsPage : Page, INotifyPropertyChanged
+public partial class ProjectsPage : BasePage
 {
     #region Properties
 
@@ -48,6 +49,18 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         }
     }
 
+    private bool _isPopable = true;
+    public bool isPopable
+    {
+        get => _isPopable;
+        set
+        {
+            _isPopable = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(popToWindowButtonVisibility));
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -57,6 +70,15 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
+    }
+
+    public ProjectsPage(bool isPopable = true)
+    {
+        InitializeComponent();
+
+        Loaded += InitialNetworkRequests;
+
+        this.isPopable = isPopable;
     }
 
     #endregion
@@ -72,6 +94,21 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
             _generalSearchString = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(filteredProjects));
+        }
+    }
+
+    public Visibility popToWindowButtonVisibility
+    {
+        get
+        {
+            if (isPopable)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
         }
     }
 
@@ -183,14 +220,18 @@ public partial class ProjectsPage : Page, INotifyPropertyChanged
 
     #endregion
 
-    #region INotifyPropertyChnaged
+    #region Button events
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
+    private void PopToWindow_Click(object sender, RoutedEventArgs e)
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        new GenericPageWindow(new ProjectsPage(isPopable: false)).Show();
     }
+
+    #endregion
+
+    #region ITitledObject
+
+    public override string title => $"Projects";
 
     #endregion
 }

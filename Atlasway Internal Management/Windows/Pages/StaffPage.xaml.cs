@@ -1,4 +1,5 @@
-﻿using Atlasway_Internal_Management.Models;
+﻿using Atlasway_Internal_Management.Core;
+using Atlasway_Internal_Management.Models;
 using Atlasway_Internal_Management.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,7 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// <summary>
 /// Interaction logic for StaffPage.xaml
 /// </summary>
-public partial class StaffPage : Page, INotifyPropertyChanged
+public partial class StaffPage : BasePage
 {
     #region Properties
 
@@ -27,6 +28,18 @@ public partial class StaffPage : Page, INotifyPropertyChanged
         }
     }
 
+    private bool _isPopable = true;
+    public bool isPopable
+    {
+        get => _isPopable;
+        set
+        {
+            _isPopable = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(popToWindowButtonVisibility));
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -38,11 +51,20 @@ public partial class StaffPage : Page, INotifyPropertyChanged
         Loaded += InitialNetworkRequests;
     }
 
+    public StaffPage(bool isPopable = true)
+    {
+        InitializeComponent();
+
+        Loaded += InitialNetworkRequests;
+
+        this.isPopable = isPopable;
+    }
+
     #endregion
 
     #region Bindings
 
-    private string _generalSearchString;
+    private string _generalSearchString = string.Empty;
     public string generalSearchString
     {
         get => _generalSearchString;
@@ -51,6 +73,21 @@ public partial class StaffPage : Page, INotifyPropertyChanged
             _generalSearchString = value;
             NotifyPropertyChanged();
             NotifyPropertyChanged(nameof(filteredStaff));
+        }
+    }
+
+    public Visibility popToWindowButtonVisibility
+    {
+        get
+        {
+            if (isPopable)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Collapsed;
+            }
         }
     }
 
@@ -126,23 +163,23 @@ public partial class StaffPage : Page, INotifyPropertyChanged
 
     #endregion
 
-    #region INotifyPropertyChnaged
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    #endregion
-
     #region Button events
 
     private void BtnStaffAdd_Click(object sender, RoutedEventArgs e)
     {
         new NewStaffWindow().Show();
-    } 
+    }
+
+    private void PopToWindow_Click(object sender, RoutedEventArgs e)
+    {
+        new GenericPageWindow(new StaffPage(isPopable: false)).Show();
+    }
+
+    #endregion
+
+    #region ITitledObject
+
+    public override string title => $"Staff";
 
     #endregion
 }

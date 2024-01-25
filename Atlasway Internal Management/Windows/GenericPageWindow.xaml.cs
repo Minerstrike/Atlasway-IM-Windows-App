@@ -15,7 +15,7 @@ public partial class GenericPageWindow : ObservableWindow
     public BasePage? page
     {
         get => _page;
-        set 
+        set
         {
             _page = value;
             NotifyPropertyChanged();
@@ -63,7 +63,18 @@ public partial class GenericPageWindow : ObservableWindow
 
     #region ITitledObject
 
-    public string titleLabel => page is not null ? page.title : "Generic window"; 
+    public string titleLabel
+    {
+        get
+        {
+            if (page is null || string.IsNullOrWhiteSpace(page.title))
+            {
+                return "Generic window";
+            }
+
+            return page.title;
+        }
+    }
 
     #endregion
 }

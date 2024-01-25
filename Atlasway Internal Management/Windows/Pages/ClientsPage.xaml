@@ -28,7 +28,7 @@
 
             <Label
                 FontSize="25"
-                Content="Client List:" />
+                Content="Client List" />
 
             <Button
                 Height="40"
