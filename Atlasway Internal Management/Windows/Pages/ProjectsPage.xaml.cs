@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Atlasway_Internal_Management.Windows.Pages;
 
@@ -148,10 +149,10 @@ public partial class ProjectsPage : BasePage
 
     private async void InitialNetworkRequests(object? sender, EventArgs e)
     {
-        await RefreshData(refreshAll: true);
+        await RefreshData(true);
     }
 
-    internal async Task RefreshData(bool refreshAll)
+    internal async Task RefreshData(bool refreshAll = false)
     {
         try
         {
@@ -225,6 +226,18 @@ public partial class ProjectsPage : BasePage
     private void PopToWindow_Click(object sender, RoutedEventArgs e)
     {
         new GenericPageWindow(new ProjectsPage(isPopable: false)).Show();
+    }
+
+    private async void Refresh_click(object sender, RoutedEventArgs e)
+    {
+        if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+        {
+            await RefreshData(true);
+        }
+        else
+        {
+            await RefreshData(false);
+        }
     }
 
     #endregion

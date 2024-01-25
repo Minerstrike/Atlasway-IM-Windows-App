@@ -175,6 +175,11 @@ public partial class StaffPage : BasePage
         new GenericPageWindow(new StaffPage(isPopable: false)).Show();
     }
 
+    private async void Refresh_click(object sender, RoutedEventArgs e)
+    {
+        await RefreshData();
+    }
+
     #endregion
 
     #region ITitledObject

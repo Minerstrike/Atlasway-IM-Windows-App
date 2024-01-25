@@ -190,6 +190,11 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         new GenericPageWindow(new ClientsPage(isPopable: false)).Show();
     }
 
+    private async void Refresh_click(object sender, RoutedEventArgs e)
+    {
+        await RefreshData();
+    }
+
     #endregion
 
     #region ITitledObject
