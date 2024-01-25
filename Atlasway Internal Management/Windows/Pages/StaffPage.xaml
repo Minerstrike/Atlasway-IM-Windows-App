@@ -66,6 +66,7 @@
             </StackPanel>
 
             <TextBox
+                x:Name="SearchBox"
                 Grid.Row="1"
                 Margin="0,5"
                 VerticalContentAlignment="Center"

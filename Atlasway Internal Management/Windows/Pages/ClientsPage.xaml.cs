@@ -3,6 +3,9 @@ using Atlasway_Internal_Management.Models;
 using Atlasway_Internal_Management.Services;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Atlasway_Internal_Management.Windows.Pages;
 
@@ -38,6 +41,18 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         }
     }
 
+    private bool _canSearch = false;
+    public bool canSearch
+    {
+        get => _canSearch;
+        set
+        {
+            _canSearch = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredClients));
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -47,6 +62,7 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
+        Loaded += InitializeSearchBox;
     }
 
     public ClientsPage(bool isPopable)
@@ -54,6 +70,7 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
+        Loaded += InitializeSearchBox;
 
         this.isPopable = isPopable;
     }
@@ -61,6 +78,7 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
     #endregion
 
     #region Bindings
+
 
     private string _generalSearchString = string.Empty;
     public string generalSearchString
@@ -95,7 +113,7 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
         {
             List<Client> clients = this.clients;
 
-            if (string.IsNullOrWhiteSpace(generalSearchString) is not true)
+            if (string.IsNullOrWhiteSpace(generalSearchString) is not true && canSearch)
             {
                 clients = clients.Where(
                         client => client.ClientNo.ToString().Contains(generalSearchString)
@@ -160,6 +178,19 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
 
     #endregion
 
+    #region SearchBox
+
+    private void InitializeSearchBox(object? sender, EventArgs e)
+    {
+        SearchBox.Foreground = Brushes.Gray;
+        SearchBox.Text = "Search";
+        canSearch = false;
+        SearchBox.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(textBox_GotKeyboardFocus);
+        SearchBox.LostKeyboardFocus += new KeyboardFocusChangedEventHandler(textBox_LostKeyboardFocus);
+    }
+
+    #endregion
+
     #region DataGrid events
 
     private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -193,6 +224,39 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
     private async void Refresh_click(object sender, RoutedEventArgs e)
     {
         await RefreshData();
+    }
+
+    #endregion
+
+    #region Custom events
+
+    private void textBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (sender is TextBox)
+        {
+            //If nothing has been entered yet.
+            if (((TextBox)sender).Foreground == Brushes.Gray)
+            {
+                ((TextBox)sender).Text = "";
+                ((TextBox)sender).SetResourceReference(Control.ForegroundProperty, "MahApps.Brushes.ThemeForeground");
+                canSearch = true;
+            }
+        }
+    }
+
+    private void textBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        //Make sure sender is the correct Control.
+        if (sender is TextBox)
+        {
+            //If nothing was entered, reset default text.
+            if (((TextBox)sender).Text.Trim().Equals(""))
+            {
+                ((TextBox)sender).Foreground = Brushes.Gray;
+                ((TextBox)sender).Text = "Search";
+                canSearch = false;
+            }
+        }
     }
 
     #endregion

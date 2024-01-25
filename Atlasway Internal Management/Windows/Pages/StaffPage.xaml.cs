@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Atlasway_Internal_Management.Windows.Pages;
 
@@ -40,6 +42,18 @@ public partial class StaffPage : BasePage
         }
     }
 
+    private bool _canSearch = false;
+    public bool canSearch
+    {
+        get => _canSearch;
+        set
+        {
+            _canSearch = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(filteredStaff));
+        }
+    }
+
     #endregion
 
     #region Constructor
@@ -49,6 +63,7 @@ public partial class StaffPage : BasePage
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
+        Loaded += InitializeSearchBox;
     }
 
     public StaffPage(bool isPopable = true)
@@ -56,6 +71,7 @@ public partial class StaffPage : BasePage
         InitializeComponent();
 
         Loaded += InitialNetworkRequests;
+        Loaded += InitializeSearchBox;
 
         this.isPopable = isPopable;
     }
@@ -97,7 +113,7 @@ public partial class StaffPage : BasePage
         {
             List<Staff> staff = this.staff;
 
-            if (string.IsNullOrWhiteSpace(generalSearchString) is not true)
+            if (string.IsNullOrWhiteSpace(generalSearchString) is not true && canSearch)
             {
                 staff = staff.Where(
                         staffMember => staffMember.StaffNo.ToString().Contains(generalSearchString)
@@ -163,6 +179,19 @@ public partial class StaffPage : BasePage
 
     #endregion
 
+    #region SearchBox
+
+    private void InitializeSearchBox(object? sender, EventArgs e)
+    {
+        SearchBox.Foreground = Brushes.Gray;
+        SearchBox.Text = "Search";
+        canSearch = false;
+        SearchBox.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(textBox_GotKeyboardFocus);
+        SearchBox.LostKeyboardFocus += new KeyboardFocusChangedEventHandler(textBox_LostKeyboardFocus);
+    }
+
+    #endregion
+
     #region Button events
 
     private void BtnStaffAdd_Click(object sender, RoutedEventArgs e)
@@ -178,6 +207,39 @@ public partial class StaffPage : BasePage
     private async void Refresh_click(object sender, RoutedEventArgs e)
     {
         await RefreshData();
+    }
+
+    #endregion
+
+    #region Custom events
+
+    private void textBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        if (sender is TextBox)
+        {
+            //If nothing has been entered yet.
+            if (((TextBox)sender).Foreground == Brushes.Gray)
+            {
+                ((TextBox)sender).Text = "";
+                ((TextBox)sender).SetResourceReference(Control.ForegroundProperty, "MahApps.Brushes.ThemeForeground");
+                canSearch = true;
+            }
+        }
+    }
+
+    private void textBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        //Make sure sender is the correct Control.
+        if (sender is TextBox)
+        {
+            //If nothing was entered, reset default text.
+            if (((TextBox)sender).Text.Trim().Equals(""))
+            {
+                ((TextBox)sender).Foreground = Brushes.Gray;
+                ((TextBox)sender).Text = "Search";
+                canSearch = false;
+            }
+        }
     }
 
     #endregion
