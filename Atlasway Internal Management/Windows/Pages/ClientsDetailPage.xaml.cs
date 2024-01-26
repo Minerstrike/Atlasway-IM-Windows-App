@@ -1,9 +1,6 @@
 ﻿using Atlasway_Internal_Management.Core;
 using Atlasway_Internal_Management.Models;
 using Atlasway_Internal_Management.Services;
-using Atlasway_Internal_Management.Windows.Interfaces;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

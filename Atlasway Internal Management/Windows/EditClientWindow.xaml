@@ -90,7 +90,7 @@
                 Background="Transparent"
                 BorderBrush="Transparent"
                 Cursor="Hand"
-                ToolTip="Add project"
+                ToolTip="Update client"
                 Click="ClientUpdate_click">
                 <Path
                     Stretch="Uniform"

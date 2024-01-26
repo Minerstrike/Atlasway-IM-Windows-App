@@ -197,8 +197,6 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
     {
         if (selectedClient is not null)
         {
-            //ClientsDetailWindow clientsDetailWindow = new ClientsDetailWindow(selectedClient.Value);
-            //clientsDetailWindow.Show();
             new GenericPageWindow(new ClientsDetailPage(selectedClient.Value)).Show();
         }
         else

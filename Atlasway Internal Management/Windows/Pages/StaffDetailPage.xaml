@@ -1,0 +1,142 @@
+﻿<core:BasePage
+    x:Class="Atlasway_Internal_Management.Windows.Pages.StaffDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:core="clr-namespace:Atlasway_Internal_Management.Core"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="#f5efef"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Border
+        Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.ColumnSpan="2"
+                BorderThickness="5,0,0,0"
+                BorderBrush="{DynamicResource MahApps.Brushes.Badged.Background}"
+                Padding="0"
+                Margin="0,0,0,10">
+                <TextBox
+                    Text="{Binding staffDetailsLabel, Mode=OneWay}"
+                    d:Text="Staff: #####"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Padding="10,0,0,0"
+                    Margin="0"
+                    IsReadOnly="True"
+                    FontSize="15"
+                    FontFamily="Cascadia Mono" />
+            </Border>
+
+            <Button
+                Grid.Column="1"
+                Height="40"
+                Width="40"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                ToolTip="Edit detail"
+                Click="ShowEditContent_Click">
+                <Path
+                    Stretch="Uniform"
+                    Fill="Gray"
+                    Data="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
+            </Button>
+
+            <Grid
+                Grid.Row="1" Grid.ColumnSpan="2"
+                Visibility="{Binding editVisibility}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="10" />
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="10" />
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="10" />
+                    <RowDefinition
+                        Height="Auto" />
+                    <RowDefinition
+                        Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="Auto" />
+                    <ColumnDefinition
+                        Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Content="Firstname: " />
+                <TextBox
+                    Grid.Column="1" />
+
+                <Label
+                    Grid.Row="2"
+                    Content="Surname: " />
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1" />
+
+                <Label
+                    Grid.Row="4"
+                    Content="Contact number: " />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="1" />
+
+                <Label
+                    Grid.Row="6"
+                    Content="Email address: " />
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1" />
+
+                <Button
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Height="40"
+                    Width="40"
+                    Margin="0,0,0,0"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Cursor="Hand"
+                    ToolTip="Add project"
+                    Click="StaffUpdate_click">
+                    <Path
+                        Stretch="Uniform"
+                        Fill="Green"
+                        Data="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+
+</core:BasePage>

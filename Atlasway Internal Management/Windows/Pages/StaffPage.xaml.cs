@@ -211,6 +211,22 @@ public partial class StaffPage : BasePage
 
     #endregion
 
+    #region DataGrid events
+
+    private void StaffDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (selectedStaff is not null)
+        {
+            new GenericPageWindow(new StaffDetailPage(selectedStaff.Value)).Show();
+        }
+        else
+        {
+            MessageBox.Show("Please select a staff member.", "No staff member selected.", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    } 
+
+    #endregion
+
     #region Custom events
 
     private void textBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

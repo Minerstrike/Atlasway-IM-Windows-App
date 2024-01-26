@@ -79,7 +79,8 @@
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
                 ItemsSource="{Binding filteredStaff}"
-                SelectedItem="{Binding selectedStaff}">
+                SelectedItem="{Binding selectedStaff}"
+                MouseDoubleClick="StaffDataGrid_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Header="Staff no."

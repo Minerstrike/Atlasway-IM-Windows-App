@@ -1,5 +1,6 @@
 ﻿using Atlasway_Internal_Management.Controls;
 using Atlasway_Internal_Management.Core;
+using System.Windows;
 
 namespace Atlasway_Internal_Management.Windows;
 
@@ -47,7 +48,12 @@ public partial class HomeWindow : ObservableWindow
     private void ObservableWindow_ContentRendered(object sender, EventArgs e)
     {
         HomePageButton.IsSelected = true;
-    } 
+    }
+
+    private void ObservableWindow_Closed(object sender, EventArgs e)
+    {
+        Application.Current.Shutdown();
+    }
 
     #endregion
 }

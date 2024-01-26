@@ -17,6 +17,7 @@
     ContentRendered="ObservableWindow_ContentRendered"
     FontFamily="Sans Serif Collection"
     WindowState="Maximized"
+    Closed="ObservableWindow_Closed"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Grid>
