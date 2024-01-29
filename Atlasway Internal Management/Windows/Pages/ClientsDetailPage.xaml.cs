@@ -300,4 +300,13 @@ public partial class ClientsDetailPage : BasePage
     public override double minWidth => 480;
 
     #endregion
+
+    #region Page events
+
+    private async void BasePage_GotFocus(object sender, RoutedEventArgs e)
+    {
+        await RefreshData();
+    }
+
+    #endregion
 }

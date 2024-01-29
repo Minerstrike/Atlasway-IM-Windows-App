@@ -308,4 +308,13 @@ public partial class ProjectsPage : BasePage
     public override string title => $"Projects";
 
     #endregion
+
+    #region Page events
+
+    private async void BasePage_GotFocus(object sender, RoutedEventArgs e)
+    {
+        await RefreshData();
+    }
+
+    #endregion
 }

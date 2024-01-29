@@ -265,4 +265,13 @@ public partial class StaffPage : BasePage
     public override string title => $"Staff";
 
     #endregion
+
+    #region Page events
+
+    private async void BasePage_GotFocus(object sender, RoutedEventArgs e)
+    {
+        await RefreshData();
+    }
+
+    #endregion
 }

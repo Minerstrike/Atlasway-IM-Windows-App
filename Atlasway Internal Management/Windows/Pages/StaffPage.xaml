@@ -10,6 +10,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="#f5efef"
+    GotFocus="BasePage_GotFocus"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Border

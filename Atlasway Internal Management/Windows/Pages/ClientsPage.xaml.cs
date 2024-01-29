@@ -264,4 +264,13 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
     public override string title => $"Clients";
 
     #endregion
+
+    #region Page events
+    
+    private async void BasePage_GotFocus(object sender, RoutedEventArgs e)
+    {
+        await RefreshData();
+    } 
+
+    #endregion
 }
