@@ -1,9 +1,10 @@
 ﻿using Atlasway_Internal_Management.Core;
 using Atlasway_Internal_Management.Models;
-using Atlasway_Internal_Management.Windows.Interfaces;
+using Atlasway_Internal_Management.Services;
+using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using Windows.Media.Protection.PlayReady;
+using System.Windows.Resources;
+using Windows.Media.ClosedCaptioning;
 
 namespace Atlasway_Internal_Management.Windows.Pages;
 
@@ -29,15 +30,26 @@ public partial class StaffDetailPage : BasePage
         }
     }
 
-    private Staff _staff;
-    public Staff staff
+    private Staff _selectedStaffMember;
+    public Staff selectedStaffMember
+    {
+        get => _selectedStaffMember;
+        set
+        {
+            _selectedStaffMember = value;
+            NotifyPropertyChanged();
+            NotifyPropertyChanged(nameof(staffDetailsLabel));
+        }
+    }
+
+    private List<Staff> _staff;
+    public List<Staff> staff
     {
         get => _staff;
-        set
+        set 
         {
             _staff = value;
             NotifyPropertyChanged();
-            NotifyPropertyChanged(nameof(staffDetailsLabel));
         }
     }
 
@@ -49,7 +61,7 @@ public partial class StaffDetailPage : BasePage
     {
         InitializeComponent();
 
-        this.staff = staff;
+        this.selectedStaffMember = staff;
     }
 
     #endregion
@@ -57,11 +69,55 @@ public partial class StaffDetailPage : BasePage
     #region Binding
 
     public string staffDetailsLabel =>
-        $"ID            : {staff.StaffNo}\n" +
-        $"Firstname     : {staff.Firstname}\n" +
-        $"Surname       : {staff.Surname}\n" +
-        $"Contact       : {staff.ContactNo}\n" +
-        $"Email address : {staff.EmailAddress}";
+        $"ID            : {selectedStaffMember.StaffNo}\n" +
+        $"Firstname     : {selectedStaffMember.Firstname}\n" +
+        $"Surname       : {selectedStaffMember.Surname}\n" +
+        $"Contact       : {selectedStaffMember.ContactNo}\n" +
+        $"Email address : {selectedStaffMember.EmailAddress}";
+
+    private string _firstname = string.Empty;
+    public string firstname
+    {
+        get => _firstname;
+        set 
+        {
+            _firstname = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private string _lastname = string.Empty;
+    public string lastname
+    {
+        get => _lastname;
+        set 
+        {
+            _lastname = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private string _contactNo = string.Empty;
+    public string contactNo
+    {
+        get => _contactNo;
+        set 
+        {
+            _contactNo = value;
+            NotifyPropertyChanged();
+        }
+    }
+
+    private string _emailAddress = string.Empty;
+    public string emailAddress
+    {
+        get => _emailAddress;
+        set
+        {
+            _emailAddress = value;
+            NotifyPropertyChanged();
+        }
+    }
 
     public Visibility editVisibility
     {
@@ -80,11 +136,88 @@ public partial class StaffDetailPage : BasePage
 
     #endregion
 
+    #region Network Requests
+
+    internal async Task RefreshData()
+    {
+        try
+        {
+            await Task.WhenAll(
+                GetStaff()
+            );
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    public async Task GetStaff()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            staff = await NetworkService.GetStaff(cancellationTokenSource.Token);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private async Task UpdateStaffMember()
+    {
+        Staff updatedStaffMember = new Staff(
+            staffNo         : selectedStaffMember.StaffNo,
+            surname         : lastname,
+            firstname       : firstname,
+            contactNo       : contactNo,
+            emailAddress    : emailAddress);
+
+        await NetworkService.UpdateStaff(updatedStaffMember, CancellationToken.None);
+
+        isEditable = false;
+        await RefreshData();
+        selectedStaffMember = staff.Where(staffMember => staffMember.StaffNo == selectedStaffMember.StaffNo).FirstOrDefault();
+    }
+
+    #endregion
+
     #region Button events
 
-    private void StaffUpdate_click(object sender, RoutedEventArgs e)
+    private async void StaffUpdate_click(object sender, RoutedEventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(firstname))
+        {
+            MessageBox.Show("Please enter a first name.", "First name is missing.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
 
+        if (string.IsNullOrWhiteSpace(lastname))
+        {
+            MessageBox.Show("Please enter a last name.", "Last name is missing.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(contactNo))
+        {
+            MessageBox.Show("Please enter a contact number.", "Contact number is missing.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(emailAddress))
+        {
+            MessageBox.Show("Please enter a email address.", "Email address is missing.", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        await UpdateStaffMember();
+
+        firstname       = string.Empty;
+        lastname        = string.Empty;
+        contactNo       = string.Empty;
+        emailAddress    = string.Empty;
     }
 
     private void ShowEditContent_Click(object sender, RoutedEventArgs e)

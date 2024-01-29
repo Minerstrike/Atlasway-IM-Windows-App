@@ -94,28 +94,32 @@
                 <Label
                     Content="Firstname: " />
                 <TextBox
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding firstname, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label
                     Grid.Row="2"
                     Content="Surname: " />
                 <TextBox
                     Grid.Row="2"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding lastname, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label
                     Grid.Row="4"
                     Content="Contact number: " />
                 <TextBox
                     Grid.Row="4"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding contactNo, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label
                     Grid.Row="6"
                     Content="Email address: " />
                 <TextBox
                     Grid.Row="6"
-                    Grid.Column="1" />
+                    Grid.Column="1"
+                    Text="{Binding emailAddress, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Button
                     Grid.Row="8"

@@ -19,6 +19,15 @@ public readonly struct Staff
         ContactNo       = staff.ContactNo;
         EmailAddress    = staff.EmailAddress;
     }
+
+    internal Staff(uint staffNo, string surname, string firstname, string contactNo, string emailAddress)
+    {
+        StaffNo         = staffNo;
+        Surname         = surname;
+        Firstname       = firstname;
+        ContactNo       = contactNo;
+        EmailAddress    = emailAddress;
+    }
 }
 
 public readonly struct NewStaff

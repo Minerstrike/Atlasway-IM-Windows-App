@@ -1,9 +1,9 @@
 ﻿using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using Atlasway_Internal_Management.Models;
 using AtlaswayInternalAPI.Authentication;
 using Newtonsoft.Json;
+using Windows.Media.Protection.PlayReady;
 
 namespace Atlasway_Internal_Management.Services;
 
@@ -77,8 +77,12 @@ public static class NetworkService
 
     public static async Task<List<Staff>> GetStaff(CancellationToken cancellationToken)
     {
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(baseUri + "staff"))
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUri + "staffV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request, cancellationToken);
+
             response.EnsureSuccessStatusCode();
 
             List<Staff> staff;
@@ -94,8 +98,30 @@ public static class NetworkService
 
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        using (HttpResponseMessage response = await ApiHelper.ApiClient.PostAsync(baseUri + "staff", content, cancellationToken))
+        using (var request = new HttpRequestMessage(HttpMethod.Post, baseUri + "staffV2"))
         {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+            request.Content = content;
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request: request, cancellationToken: cancellationToken);
+
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
+    public static async Task UpdateStaff(Staff staff, CancellationToken cancellationToken)
+    {
+        string json = JsonConvert.SerializeObject(staff);
+
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, baseUri + "staffV2"))
+        {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+            request.Content = content;
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request: request, cancellationToken: cancellationToken);
+
             response.EnsureSuccessStatusCode();
         }
     }
