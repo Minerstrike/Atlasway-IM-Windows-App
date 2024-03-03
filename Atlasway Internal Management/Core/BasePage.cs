@@ -53,4 +53,6 @@ public abstract class BasePage : Page, INotifyPropertyChanged, ITitledObject, IT
     public virtual double minWidth => 0;
 
     #endregion
+
+    public delegate void Close(object source, EventArgs e);
 }

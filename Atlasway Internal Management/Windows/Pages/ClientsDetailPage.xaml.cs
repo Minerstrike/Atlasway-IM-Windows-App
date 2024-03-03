@@ -233,6 +233,24 @@ public partial class ClientsDetailPage : BasePage
 
     #endregion
 
+    #region DataGrid
+
+    private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (selectedProject is null)
+        {
+            MessageBox.Show("No project selected", "Please select a project.", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        GenericPageWindow window = new GenericPageWindow();
+        EditProjectPage page = new EditProjectPage(client, selectedProject.Value, window);
+        window.page = page;
+        window.Show();
+    }
+
+    #endregion
+
     #region ITitledObject
 
     public override string title => $"{client.ClientName} detail";

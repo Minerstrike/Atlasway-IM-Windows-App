@@ -34,6 +34,8 @@
                 <ColumnDefinition
                     Width="Auto" />
                 <ColumnDefinition
+                    Width="Auto" />
+                <ColumnDefinition
                     Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -61,11 +63,28 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Width="200"
+                Width="300"
                 Margin="0,0,0,10"
                 HorizontalAlignment="Left"
                 VerticalContentAlignment="Center"
                 Text="{Binding contactNo, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="25"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                ToolTip="Use current contact number"
+                Click="FillContactNo_Click">
+                <Path
+                    Stretch="Uniform"
+                    Fill="{DynamicResource MahApps.Brushes.Accent2}"
+                    Data="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </Button>
 
             <Label
                 Grid.Row="2"
@@ -78,10 +97,27 @@
                 HorizontalAlignment="Left"
                 VerticalContentAlignment="Center"
                 Text="{Binding emailAddress, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Width="25"
+                Height="25"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                ToolTip="Use current email address"
+                Click="FillEmailAddress_Click">
+                <Path
+                    Stretch="Uniform"
+                    Fill="{DynamicResource MahApps.Brushes.Accent2}"
+                    Data="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </Button>
 
             <Button
                 Grid.Row="4"
-                Grid.Column="1"
+                Grid.Column="2"
                 Height="40"
                 Width="40"
                 Margin="10,10,0,0"

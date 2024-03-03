@@ -107,6 +107,7 @@
                 BorderThickness="1"
                 IsReadOnly="True"
                 AutoGenerateColumns="False"
+                MouseDoubleClick="DataGrid_MouseDoubleClick"
                 ItemsSource="{Binding filteredProjects}"
                 SelectedItem="{Binding selectedProject}">
                 <DataGrid.Columns>

@@ -35,6 +35,9 @@ public partial class EditClientWindow : ObservableWindow
         InitializeComponent();
 
         this.client = client;
+
+        contactNo       = client.ContactNo ?? string.Empty;
+        emailAddress    = client.EmailAddress ?? string.Empty;
     }
 
     #endregion
@@ -116,6 +119,15 @@ public partial class EditClientWindow : ObservableWindow
         }
     }
 
+    private void FillContactNo_Click(object sender, RoutedEventArgs e)
+    {
+        contactNo = client.ContactNo ?? string.Empty;
+    }
+
+    private void FillEmailAddress_Click(object sender, RoutedEventArgs e)
+    {
+        emailAddress = client.EmailAddress ?? string.Empty;
+    }
 
     #endregion
 }

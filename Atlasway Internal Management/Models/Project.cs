@@ -17,6 +17,14 @@ public readonly struct Project
         ClientNo    = project.ClientNo;
         StatusNo    = project.StatusNo;
     }
+
+    internal Project(uint projectNo, string projectName, uint clientNo, uint statusNo)
+    {
+        ProjectNo   = projectNo;
+        ProjectName = projectName;
+        ClientNo    = clientNo;
+        StatusNo    = statusNo;
+    }
 }
 
 public readonly struct NewProject

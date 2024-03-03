@@ -223,6 +223,39 @@ public partial class StaffDetailPage : BasePage
     private void ShowEditContent_Click(object sender, RoutedEventArgs e)
     {
         isEditable = !isEditable;
+
+        firstname       = selectedStaffMember.Firstname;
+        lastname        = selectedStaffMember.Surname;
+        contactNo       = selectedStaffMember.ContactNo;
+        emailAddress    = selectedStaffMember.EmailAddress;
+    }
+
+    private void ResetContent_Click(object sender, RoutedEventArgs e)
+    {
+        firstname = selectedStaffMember.Firstname;
+        lastname = selectedStaffMember.Surname;
+        contactNo = selectedStaffMember.ContactNo;
+        emailAddress = selectedStaffMember.EmailAddress;
+    }
+
+    private void FillFirstname_Click(object sender, RoutedEventArgs e)
+    {
+        firstname = selectedStaffMember.Firstname;
+    }
+
+    private void FillLastname_Click(object sender, RoutedEventArgs e)
+    {
+        lastname = selectedStaffMember.Surname;
+    }
+
+    private void FillContactNo_Click(object sender, RoutedEventArgs e)
+    {
+        contactNo = selectedStaffMember.ContactNo;
+    }
+
+    private void FillEmailAddress_Click(object sender, RoutedEventArgs e)
+    {
+        emailAddress = selectedStaffMember.EmailAddress;
     }
 
     #endregion

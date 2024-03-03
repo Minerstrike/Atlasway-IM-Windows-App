@@ -13,7 +13,7 @@ namespace Atlasway_Internal_Management.Windows.Pages;
 /// <summary>
 /// Interaction logic for ClientsPage.xaml
 /// </summary>
-public partial class ClientsPage : BasePage, INotifyPropertyChanged
+public partial class ClientsPage : BasePage
 {
     #region Properties
 
@@ -193,7 +193,7 @@ public partial class ClientsPage : BasePage, INotifyPropertyChanged
 
     #region DataGrid events
 
-    private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (selectedClient is not null)
         {

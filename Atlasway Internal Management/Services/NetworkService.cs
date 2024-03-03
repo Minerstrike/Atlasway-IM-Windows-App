@@ -164,6 +164,23 @@ public static class NetworkService
         }
     }
 
+    public static async Task UpdateProject(Project project, CancellationToken cancellationToken)
+    {
+        string json = JsonConvert.SerializeObject(project);
+
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, baseUri + "projectsV2"))
+        {
+            request.Headers.Add(AuthConstants.ApiKeyHeaderName, AuthConstants.ApiKey);
+            request.Content = content;
+
+            HttpResponseMessage response = await ApiHelper.ApiClient.SendAsync(request: request, cancellationToken: cancellationToken);
+
+            response.EnsureSuccessStatusCode();
+        }
+    }
+
     public static async Task<List<ProjectStatusType>> GetProjectStatusTypes(CancellationToken cancellationToken)
     {
         using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, baseUri + "projectstatustypesV2"))
